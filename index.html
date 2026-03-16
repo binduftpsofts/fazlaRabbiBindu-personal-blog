@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fazle Rabbi Bindu - Software Engineer | MERN Stack, Blender, Robotics & IoT Expert">
+    <title>Fazle Rabbi Bindu | Software Engineer</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        :root {
+            --primary: 165 243 252;
+        }
+        
+        .tail-container {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .logo-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at 50% 20%, rgba(165, 243, 252, 0.12) 0%, transparent 70%);
+        }
+
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, rgb(165 243 252), rgb(103 232 249));
+            border-radius: 9999px;
+        }
+
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            background: rgb(165 243 252);
+            box-shadow: 0 0 0 6px rgba(165, 243, 252, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: rgb(165 243 252);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            animation: slideDown 0.3s ease forwards;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="tail-container bg-zinc-950 text-white overflow-x-hidden">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-lg border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-cyan-400 rounded-2xl flex items-center justify-center text-zinc-950 font-bold text-2xl logo-font">FB</div>
+                <div>
+                    <span class="logo-font text-2xl font-semibold tracking-tighter">Fazle Rabbi</span>
+                    <span class="text-xs text-cyan-400 block -mt-1">BINDU</span>
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-9 text-sm font-medium">
+                <a href="#about" class="nav-link text-zinc-300 hover:text-white transition-colors">About</a>
+                <a href="#skills" class="nav-link text-zinc-300 hover:text-white transition-colors">Skills</a>
+                <a href="#experience" class="nav-link text-zinc-300 hover:text-white transition-colors">Experience</a>
+                <a href="#projects" class="nav-link text-zinc-300 hover:text-white transition-colors">Projects</a>
+                <a href="#education" class="nav-link text-zinc-300 hover:text-white transition-colors">Education</a>
+                <a href="#contact" class="nav-link text-zinc-300 hover:text-white transition-colors">Contact</a>
+            </div>
+
+            <!-- Resume & Mobile Toggle -->
+            <div class="flex items-center gap-4">
+                <a href="#" onclick="downloadResume()" 
+                   class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-white text-zinc-950 rounded-2xl font-semibold text-sm hover:bg-cyan-300 transition-all active:scale-95">
+                    <i class="fa-solid fa-download"></i>
+                    Resume
+                </a>
+                
+                <button id="mobile-menu-btn"
+                        class="md:hidden w-11 h-11 flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-zinc-800 px-6 py-8 mobile-menu">
+            <div class="flex flex-col gap-6 text-lg font-medium">
+                <a href="#about" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="#skills" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition-colors">Skills</a>
+                <a href="#experience" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition-colors">Experience</a>
+                <a href="#projects" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition-colors">Projects</a>
+                <a href="#education" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition-colors">Education</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition-colors">Contact</a>
+                
+                <a href="#" onclick="downloadResume();toggleMobileMenu()" 
+                   class="mt-4 flex items-center justify-center gap-2 py-4 bg-white text-zinc-950 rounded-3xl font-semibold">
+                    <i class="fa-solid fa-download"></i>
+                    Download Resume
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="home" class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-5 py-2 bg-zinc-900 rounded-3xl text-sm font-medium border border-zinc-700">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    Available for opportunities
+                </div>
+                
+                <h1 class="text-7xl md:text-8xl font-bold tracking-tighter logo-font leading-none">
+                    FAZLE RABBI<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-sky-400">BINDU</span>
+                </h1>
+                
+                <div class="text-2xl text-zinc-400 font-light">
+                    Software Engineer<br>
+                    <span class="text-cyan-300">MERN • Blender • Robotics • IoT</span>
+                </div>
+                
+                <p class="max-w-md text-lg text-zinc-400">
+                    Building scalable web applications and intelligent physical systems. 
+                    Currently crafting solutions at FtpSofts since February 2025.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" 
+                       class="px-8 py-4 bg-cyan-400 hover:bg-cyan-300 text-zinc-950 font-semibold rounded-3xl flex items-center gap-3 transition-all active:scale-95">
+                        <span>View My Work</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    
+                    <a href="#contact" 
+                       class="px-8 py-4 border border-zinc-400 hover:border-white font-medium rounded-3xl transition-all">
+                        Let's Talk
+                    </a>
+                </div>
+                
+                <!-- Socials -->
+                <div class="flex gap-6 text-2xl pt-6">
+                    <a href="https://github.com" target="_blank" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://x.com/FBindu1125" target="_blank" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://behance.net" target="_blank" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-behance"></i></a>
+                </div>
+            </div>
+            
+            <!-- Hero Visual -->
+            <div class="relative flex justify-center">
+                <div class="relative w-80 h-80 md:w-96 md:h-96">
+                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-transparent rounded-[4rem] rotate-12"></div>
+                    <img src="https://picsum.photos/id/64/600/600" 
+                         alt="Fazle Rabbi Bindu"
+                         class="w-full h-full object-cover rounded-3xl shadow-2xl border-8 border-zinc-900 relative z-10">
+                    
+                    <!-- Floating badges -->
+                    <div class="absolute -top-4 -left-6 bg-zinc-900 border border-cyan-400 text-cyan-400 text-xs px-4 py-2 rounded-2xl flex items-center gap-2 shadow-xl">
+                        <i class="fa-solid fa-code"></i>
+                        <span>MERN Expert</span>
+                    </div>
+                    <div class="absolute -bottom-4 right-8 bg-zinc-900 border border-emerald-400 text-emerald-400 text-xs px-4 py-2 rounded-2xl flex items-center gap-2 shadow-xl">
+                        <i class="fa-solid fa-robot"></i>
+                        <span>Robotics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 flex flex-col items-center gap-2 text-xs text-zinc-500">
+            <span>SCROLL TO EXPLORE</span>
+            <i class="fa-solid fa-chevron-down animate-bounce"></i>
+        </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="grid md:grid-cols-12 gap-16 items-center">
+            <div class="md:col-span-5">
+                <div class="sticky top-28">
+                    <img src="https://picsum.photos/id/64/800/800" 
+                         alt="Fazle Rabbi Bindu"
+                         class="rounded-3xl shadow-2xl">
+                </div>
+            </div>
+            
+            <div class="md:col-span-7 space-y-8">
+                <div class="section-header">
+                    <span class="uppercase tracking-[3px] text-cyan-400 text-sm font-medium">CHAPTER 01</span>
+                    <h2 class="text-5xl font-bold tracking-tighter logo-font">About Me</h2>
+                </div>
+                
+                <div class="prose prose-invert text-zinc-400 text-lg leading-relaxed max-w-none">
+                    <p>
+                        Hi, I'm Fazle Rabbi Bindu — a passionate Software Engineer with a unique blend of full-stack development, 
+                        3D creativity, and hardware automation.
+                    </p>
+                    <p>
+                        I specialize in the <span class="text-cyan-300 font-medium">MERN stack</span> to build blazing-fast, scalable web applications. 
+                        Alongside code, I create stunning 3D visuals with Blender and design intelligent systems using Robotics and IoT technologies.
+                    </p>
+                    <p>
+                        Currently shaping the future at <span class="font-semibold text-white">FtpSofts</span> (Feb 2025 — Present), 
+                        I turn complex problems into elegant digital and physical solutions.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-6 pt-8 border-t border-zinc-800">
+                    <div>
+                        <div class="text-4xl font-bold text-cyan-300">3+</div>
+                        <div class="text-zinc-400 text-sm">Years Coding</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold text-cyan-300">15+</div>
+                        <div class="text-zinc-400 text-sm">Projects Delivered</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold text-cyan-300">∞</div>
+                        <div class="text-zinc-400 text-sm">Creativity</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="bg-zinc-900 py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="section-header text-center mb-16">
+                <span class="uppercase tracking-[3px] text-cyan-400 text-sm font-medium">CHAPTER 02</span>
+                <h2 class="text-5xl font-bold tracking-tighter logo-font">Expertise</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Skill cards -->
+                <div class="bg-zinc-950 border border-zinc-800 hover:border-cyan-400 p-8 rounded-3xl transition-all group">
+                    <i class="fa-solid fa-laptop-code text-4xl text-cyan-400 mb-6"></i>
+                    <h3 class="text-2xl font-semibold mb-2">MERN Stack</h3>
+                    <p class="text-zinc-400 text-sm">React • Node.js • Express • MongoDB • Tailwind</p>
+                </div>
+                
+                <div class="bg-zinc-950 border border-zinc-800 hover:border-cyan-400 p-8 rounded-3xl transition-all group">
+                    <i class="fa-solid fa-cube text-4xl text-amber-400 mb-6"></i>
+                    <h3 class="text-2xl font-semibold mb-2">Blender 3D</h3>
+                    <p class="text-zinc-400 text-sm">Modeling • Animation • Rendering • WebGL export</p>
+                </div>
+                
+                <div class="bg-zinc-950 border border-zinc-800 hover:border-cyan-400 p-8 rounded-3xl transition-all group">
+                    <i class="fa-solid fa-robot text-4xl text-emerald-400 mb-6"></i>
+                    <h3 class="text-2xl font-semibold mb-2">Robotics</h3>
+                    <p class="text-zinc-400 text-sm">ROS • Arduino • Path Planning • Simulation</p>
+                </div>
+                
+                <div class="bg-zinc-950 border border-zinc-800 hover:border-cyan-400 p-8 rounded-3xl transition-all group">
+                    <i class="fa-solid fa-house-signal text-4xl text-violet-400 mb-6"></i>
+                    <h3 class="text-2xl font-semibold mb-2">IoT Automation</h3>
+                    <p class="text-zinc-400 text-sm">Raspberry Pi • MQTT • ESP32 • Smart Systems</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="section-header mb-16">
+            <span class="uppercase tracking-[3px] text-cyan-400 text-sm font-medium">CHAPTER 03</span>
+            <h2 class="text-5xl font-bold tracking-tighter logo-font">Experience</h2>
+        </div>
+        
+        <div class="space-y-16">
+            <!-- Job 1 -->
+            <div class="grid md:grid-cols-12 gap-8 items-start">
+                <div class="md:col-span-3">
+                    <div class="text-cyan-400 font-mono text-sm">FEB 2025 — PRESENT</div>
+                </div>
+                <div class="md:col-span-9 bg-zinc-900 rounded-3xl p-10">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-semibold">Software Engineer</h3>
+                            <p class="text-cyan-300">FtpSofts</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="px-4 py-1 text-xs bg-zinc-800 rounded-full">Full-time</span>
+                        </div>
+                    </div>
+                    <ul class="mt-8 space-y-4 text-zinc-400 list-disc pl-5">
+                        <li>Developed and maintained full-stack MERN applications for enterprise clients</li>
+                        <li>Integrated IoT sensors with real-time dashboards using MQTT and React</li>
+                        <li>Created 3D product visualizations using Blender for marketing teams</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="bg-zinc-900 py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="section-header text-center mb-16">
+                <span class="uppercase tracking-[3px] text-cyan-400 text-sm font-medium">CHAPTER 04</span>
+                <h2 class="text-5xl font-bold tracking-tighter logo-font">Featured Projects</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden border border-zinc-800">
+                    <img src="https://picsum.photos/id/201/800/600" class="w-full h-56 object-cover" alt="Smart Home IoT">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold">SmartHome Hub</h3>
+                        <p class="text-zinc-400 text-sm mt-1">MERN + IoT + Raspberry Pi</p>
+                        <div class="flex gap-2 mt-6">
+                            <span class="text-xs bg-zinc-800 px-3 py-1 rounded-full">React</span>
+                            <span class="text-xs bg-zinc-800 px-3 py-1 rounded-full">Node.js</span>
+                            <span class="text-xs bg-zinc-800 px-3 py-1 rounded-full">MQTT</span>
+                        </div>
+                        <div class="mt-8 flex gap-4">
+                            <a href="#" class="flex-1 text-center py-3 bg-white text-black rounded-2xl font-medium">Live Demo</a>
+                            <a href="#" class="flex-1 text-center py-3 border border-zinc-400 rounded-2xl">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden border border-zinc-800">
+                    <img src="https://picsum.photos/id/29/800/600" class="w-full h-56 object-cover" alt="Blender Robot">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold">RoboForge 3D</h3>
+                        <p class="text-zinc-400 text-sm mt-1">Blender • Three.js • Robotics Sim</p>
+                        <div class="flex gap-2 mt-6">
+                            <span class="text-xs bg-zinc-800 px-3 py-1 rounded-full">Blender</span>
+                            <span class="text-xs bg-zinc-800 px-3 py-1 rounded-full">WebGL</span>
+                        </div>
+                        <div class="mt-8 flex gap-4">
+                            <a href="#" class="flex-1 text-center py-3 bg-white text-black rounded-2xl font-medium">View 3D</a>
+                            <a href="#" class="flex-1 text-center py-3 border border-zinc-400 rounded-2xl">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden border border-zinc-800">
+                    <img src="https://picsum.photos/id/180/800/600" class="w-full h-56 object-cover" alt="E-commerce">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold">ShopSphere</h3>
+                        <p class="text-zinc-400 text-sm mt-1">Full MERN E-commerce Platform</p>
+                        <div class="flex gap-2 mt-6">
+                            <span class="text-xs bg-zinc-800 px-3 py-1 rounded-full">Next.js</span>
+                            <span class="text-xs bg-zinc-800 px-3 py-1 rounded-full">Stripe</span>
+                        </div>
+                        <div class="mt-8 flex gap-4">
+                            <a href="#" class="flex-1 text-center py-3 bg-white text-black rounded-2xl font-medium">Live Demo</a>
+                            <a href="#" class="flex-1 text-center py-3 border border-zinc-400 rounded-2xl">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="section-header mb-16">
+            <span class="uppercase tracking-[3px] text-cyan-400 text-sm font-medium">CHAPTER 05</span>
+            <h2 class="text-5xl font-bold tracking-tighter logo-font">Education</h2>
+        </div>
+        
+        <div class="max-w-2xl mx-auto bg-zinc-900 rounded-3xl p-12">
+            <div class="flex items-center gap-4">
+                <div class="timeline-dot rounded-full flex-shrink-0"></div>
+                <div>
+                    <div class="text-cyan-400 font-medium">2021 — 2025</div>
+                    <h3 class="text-3xl font-semibold">BSc in Computer Science & Engineering</h3>
+                    <p class="text-lg text-zinc-400">Mymensingh Engineering College</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="bg-zinc-950 py-24">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="uppercase tracking-[3px] text-cyan-400 text-sm font-medium">CHAPTER 06</span>
+                <h2 class="text-5xl font-bold tracking-tighter logo-font">Get In Touch</h2>
+            </div>
+            
+            <form id="contact-form" class="space-y-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <input type="text" id="name" placeholder="Your Name" 
+                           class="bg-zinc-900 border border-zinc-700 focus:border-cyan-400 rounded-3xl px-8 py-6 text-lg outline-none">
+                    <input type="email" id="email" placeholder="your@email.com" 
+                           class="bg-zinc-900 border border-zinc-700 focus:border-cyan-400 rounded-3xl px-8 py-6 text-lg outline-none">
+                </div>
+                <textarea id="message" rows="7" placeholder="Your message..." 
+                          class="bg-zinc-900 border border-zinc-700 focus:border-cyan-400 rounded-3xl px-8 py-6 text-lg outline-none w-full resize-none"></textarea>
+                
+                <button type="submit"
+                        class="w-full py-7 bg-gradient-to-r from-cyan-400 to-sky-400 text-zinc-950 font-bold text-xl rounded-3xl hover:brightness-110 transition-all">
+                    SEND MESSAGE
+                </button>
+            </form>
+            
+            <div class="text-center text-zinc-500 text-sm mt-12">
+                Or email me directly at <a href="mailto:fazlerabbi.bindu@gmail.com" class="text-cyan-400 hover:underline">fazlerabbi.bindu@gmail.com</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 border-t border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500 text-sm">
+            <p>© 2026 Fazle Rabbi Bindu. Built with ❤️ and Tailwind CSS.</p>
+            <p class="mt-2">Ready to deploy on GitHub Pages — just push to main branch.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script initialization
+        function initializeTailwind() {
+            // Already configured via CDN
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const navHeight = 80;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.scrollY - navHeight;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Fake resume download
+        function downloadResume() {
+            const link = document.createElement('a');
+            link.href = '#'; // Replace with your actual resume link (e.g. resume.pdf in repo)
+            link.download = 'Fazle-Rabbi-Bindu-Resume.pdf';
+            link.click();
+            
+            // Show toast
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:rgb(165 243 252); color:#111; padding:16px 32px; border-radius:9999px; font-weight:600; box-shadow:0 10px 15px -3px rgb(0 0 0 / 0.3); z-index:9999;';
+            toast.textContent = 'Resume downloaded! (Add your PDF to repo)';
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transition = 'all 0.4s';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 2800);
+        }
+
+        // Contact form handler (demo)
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            if (!name) {
+                alert("Please enter your name");
+                return;
+            }
+            
+            // Success message
+            const success = document.createElement('div');
+            success.style.cssText = 'position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgb(16 185 129); color:white; padding:24px 48px; border-radius:9999px; font-size:18px; font-weight:700; text-align:center; box-shadow:0 25px 50px -12px rgb(0 0 0); z-index:99999;';
+            success.innerHTML = `✅ Message sent!<br><span class="text-sm opacity-75">Thank you, ${name}!</span>`;
+            document.body.appendChild(success);
+            
+            setTimeout(() => {
+                success.remove();
+                document.getElementById('contact-form').reset();
+            }, 2400);
+        });
+
+        // Keyboard shortcut for mobile menu (demo)
+        document.addEventListener('keydown', (e) => {
+            if (e.metaKey && e.key === 'k') {
+                e.preventDefault();
+                toggleMobileMenu();
+            }
+        });
+
+        // Initialize everything
+        window.onload = function() {
+            initializeTailwind();
+            console.log('%c✅ Portfolio ready! Deploy on GitHub Pages in one click.', 'color:#67e8f9; font-family:monospace;');
+        };
+    </script>
+</body>
+</html>
